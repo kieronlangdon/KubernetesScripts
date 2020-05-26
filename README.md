@@ -1,11 +1,11 @@
 # KubernetesScripts
 Kubernetes helper scripts  
 Assuming user has active ibmcloud/kubernetes config terminal form which scripts will be run
-## CheckWorkerNodes.sh
+#### CheckWorkerNodes.sh
 Checks worker nodes for a cluster user has access to
-## CleanReplicasNoPods.sh
+#### CleanReplicasNoPods.sh
 Checks namespace for replicas with no active pods and removes them
-## Get0PodsAvailableFromDeployment.sh
+#### Get0PodsAvailableFromDeployment.sh
 Gets list of deployments in namespace with 0 pods
-## RemovePodsInTerminatingState.sh
+#### RemovePodsInTerminatingState.sh
 Checks namespace for pods stuck in terminating state and removes them
