@@ -23,7 +23,7 @@ remove_old_files()
 get_all_pods_terminating()
 {
   echo "[INFO]  - Get pods that are in terminating state, adding to ${FILE}.txt"
-  kubectl get pods --field-selector=status.phase=Terminating -n ${ENV} > ${FILE}.txt #Get pods that are in terminating state
+  kubectl get pods --field-selector=status.phase!=Running -n ${ENV} | grep Terminating > ${FILE}.txt #Get pods that are in termintaing state
   if [[ -z $(grep '[^[:space:]]' ${FILE}.txt) ]] ; then
   echo "Nothing to clean...Exiting..."
   exit 0
@@ -41,7 +41,7 @@ clean_and_delete()
   echo "[INFO]  - Deleting the pods in terminating state as listed in ${CLEANED}.txt"
   cat ${CLEANED}.txt | while read line
    do
-     kubectl delete -n ${ENV} pod $line #DEL the pod(s) as listed in ${CLEANED}.txt
+     kubectl delete pod $line --grace-period=0 --force --namespace ${ENV} #DEL the pod(s) as listed in ${CLEANED}.txt
    done
 }
 
